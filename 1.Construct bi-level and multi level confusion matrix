@@ -1,0 +1,28 @@
+import matplotlib.pyplot as plt
+import seaborn as sns
+from sklearn.metrics import confusion_matrix
+# Bi-level (Binary) data
+y_true_bin = [1, 0, 1, 1, 0, 1, 0, 0]
+y_pred_bin = [1, 0, 0, 1, 0, 1, 1, 0]
+cm_bin = confusion_matrix(y_true_bin, y_pred_bin)
+# Multi-level (Multi-class) data
+y_true_multi = [0, 1, 2, 2, 1, 0, 1, 2]
+y_pred_multi = [0, 2, 2, 1, 1, 0, 0, 2]
+cm_multi = confusion_matrix(y_true_multi, y_pred_multi)
+# Plot both in one frame
+plt.figure(figsize=(10, 4))
+# Bi-level confusion matrix
+plt.subplot(1, 2, 1)
+sns.heatmap(cm_bin, annot=True, fmt="d", cmap="Blues")
+plt.title("Bi-level Confusion Matrix")
+plt.xlabel("Predicted")
+plt.ylabel("Actual")
+# Multi-level confusion matrix
+plt.subplot(1, 2, 2)
+sns.heatmap(cm_multi, annot=True, fmt="d", cmap="Greens")
+plt.title("Multi-level Confusion Matrix")
+plt.xlabel("Predicted")
+plt.ylabel("Actual")
+plt.tight_layout()
+plt.show()
+
