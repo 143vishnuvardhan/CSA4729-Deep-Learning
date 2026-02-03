@@ -1,0 +1,33 @@
+from sklearn.datasets import make_classification
+from sklearn.tree import DecisionTreeClassifier
+from sklearn.model_selection import train_test_split
+from sklearn.metrics import accuracy_score
+import matplotlib.pyplot as plt
+
+# Step 1: Create numerical dataset
+X, y = make_classification(n_samples=1000, n_features=10,
+                           n_informative=2, random_state=42)
+
+# Step 2: Split data
+X_train, X_test, y_train, y_test = train_test_split(
+    X, y, test_size=0.3, random_state=42)
+# Step 3: Train complex model
+model = DecisionTreeClassifier(max_depth=None)
+model.fit(X_train, y_train)
+# Step 4: Predictions
+train_pred = model.predict(X_train)
+test_pred = model.predict(X_test)
+
+# Step 5: Accuracy calculation
+train_acc = accuracy_score(y_train, train_pred)
+test_acc = accuracy_score(y_test, test_pred)
+
+print("Training Accuracy:", train_acc)
+print("Testing Accuracy:", test_acc)
+
+# Step 6: Visualization
+plt.figure()
+plt.bar(["Training Accuracy", "Testing Accuracy"], [train_acc, test_acc])
+plt.title("Verification of Overfitting")
+plt.ylabel("Accuracy")
+plt.show()
