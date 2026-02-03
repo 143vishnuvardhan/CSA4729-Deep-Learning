@@ -1,0 +1,37 @@
+import numpy as np
+import matplotlib.pyplot as plt
+# Step 1: Numerical dataset
+X = np.array([1, 2, 3, 4, 5])
+y = np.array([2, 4, 6, 8, 10])
+# Step 2: Initialize parameters
+w = 0.0
+b = 0.0
+learning_rate = 0.01
+epochs = 50
+
+cost_history = []
+
+# Step 3–6: Gradient Descent
+for i in range(epochs):
+    y_pred = w * X + b
+    
+    # Cost function (MSE)
+    cost = np.mean((y - y_pred) ** 2)
+    cost_history.append(cost)
+    
+    # Gradients
+    dw = -2 * np.mean(X * (y - y_pred))
+    db = -2 * np.mean(y - y_pred)
+    
+    # Update parameters
+    w = w - learning_rate * dw
+    b = b - learning_rate * db
+
+    print(f"Epoch {i+1}: Cost = {cost:.4f}")
+# Step 7: Plot cost reduction
+plt.figure()
+plt.plot(cost_history)
+plt.xlabel("Iterations")
+plt.ylabel("Cost (MSE)")
+plt.title("Performance of Gradient Descent")
+plt.show()
